@@ -1,7 +1,7 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
-const pool = require('../src/config/pool');
-const userRepository = require('../src/repositories/user.repository');
+const pool = require('../config/pool');
+const userRepository = require('../repositories/user.repository');
 
 const run = async () => {
   const email = process.env.SEED_ADMIN_EMAIL;
