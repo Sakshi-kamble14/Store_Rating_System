@@ -26,10 +26,12 @@ app.use('/api/stores', storeRoutes);
 app.use('/api/ratings', ratingRoutes);
 app.use('/api/owner', ownerRoutes);
 
-app.all('*', (req, res, next) => {
-  next(new AppError(`Route ${req.originalUrl} not found`, 404));
+app.use((req, res) => {
+    res.status(404).json({
+        success: false,
+        message: 'Route not found'
+    });
 });
-
 app.use(errorHandler);
 
 module.exports = app;

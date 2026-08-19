@@ -89,3 +89,9 @@ ON stores(address);
 
 CREATE INDEX idx_ratings_store
 ON ratings(store_id);
+
+select * from users;
+select * from ratings;
+select * from stores;
+
+
