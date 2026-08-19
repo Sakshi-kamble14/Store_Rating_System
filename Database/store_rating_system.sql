@@ -1,27 +1,55 @@
-CREATE DATABASE store_rating_system;
+-- ============================================
+-- STORE RATING SYSTEM
+-- Database Schema
+-- ============================================
 
-USE store_rating_system;
+CREATE DATABASE IF NOT EXISTS store_rating_db;
+
+USE store_rating_db;
+
+
+-- ============================================
+-- USERS
+-- ============================================
 
 CREATE TABLE users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
     name VARCHAR(60) NOT NULL,
+
     email VARCHAR(255) NOT NULL UNIQUE,
+
     password VARCHAR(255) NOT NULL,
+
     address VARCHAR(400) NOT NULL,
-    role ENUM('ADMIN', 'USER', 'STORE_OWNER') NOT NULL DEFAULT 'USER',
+
+    role ENUM('ADMIN', 'USER', 'OWNER')
+        NOT NULL DEFAULT 'USER',
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP
 );
 
+
+-- ============================================
+-- STORES
+-- ============================================
+
 CREATE TABLE stores (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    name VARCHAR(60) NOT NULL,
+
+    email VARCHAR(255) NOT NULL,
+
     address VARCHAR(400) NOT NULL,
+
     owner_id INT NOT NULL,
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP,
 
@@ -32,13 +60,22 @@ CREATE TABLE stores (
         ON UPDATE CASCADE
 );
 
+
+-- ============================================
+-- RATINGS
+-- ============================================
+
 CREATE TABLE ratings (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
     user_id INT NOT NULL,
+
     store_id INT NOT NULL,
+
     rating TINYINT NOT NULL,
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP,
 
@@ -48,13 +85,38 @@ CREATE TABLE ratings (
     CONSTRAINT fk_rating_user
         FOREIGN KEY (user_id)
         REFERENCES users(id)
-        ON DELETE CASCADE,
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
 
     CONSTRAINT fk_rating_store
         FOREIGN KEY (store_id)
         REFERENCES stores(id)
-        ON DELETE CASCADE,
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
 
-    CONSTRAINT unique_user_store_rating
+    CONSTRAINT unique_user_store
         UNIQUE (user_id, store_id)
 );
+
+
+-- ============================================
+-- INDEXES
+-- ============================================
+
+CREATE INDEX idx_users_name
+ON users(name);
+
+CREATE INDEX idx_users_role
+ON users(role);
+
+CREATE INDEX idx_stores_name
+ON stores(name);
+
+CREATE INDEX idx_stores_address
+ON stores(address);
+
+CREATE INDEX idx_ratings_store
+ON ratings(store_id);
+
+CREATE INDEX idx_ratings_user
+ON ratings(user_id);
