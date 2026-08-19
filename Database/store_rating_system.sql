@@ -94,4 +94,12 @@ select * from users;
 select * from ratings;
 select * from stores;
 
+SELECT id, name, email, role
+FROM users
+WHERE role = 'ADMIN';
+
+SELECT id, name, email, role
+FROM users
+WHERE role = 'OWNER';
+
 
