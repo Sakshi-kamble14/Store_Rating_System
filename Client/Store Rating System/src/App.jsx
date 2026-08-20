@@ -1,122 +1,76 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext.jsx';
+
+import ProtectedRoute from './components/common/ProtectedRoute.jsx';
+import RoleRoute from './components/common/RoleRoute.jsx';
+import DashboardLayout from './components/layout/DashboardLayout.jsx';
+
+import Login from './pages/auth/Login.jsx';
+import Signup from './pages/auth/Signup.jsx';
+import Forbidden from './pages/errors/Forbidden.jsx';
+import NotFound from './pages/errors/NotFound.jsx';
+
+import AdminDashboard from './pages/admin/Dashboard.jsx';
+import AdminUsers from './pages/admin/Users.jsx';
+import AdminUserDetails from './pages/admin/UserDetails.jsx';
+import AdminStores from './pages/admin/Stores.jsx';
+import AdminSettings from './pages/admin/Settings.jsx';
+
+import UserDashboard from './pages/user/Dashboard.jsx';
+import UserStores from './pages/user/Stores.jsx';
+import UserRatings from './pages/user/MyRatings.jsx';
+import UserSettings from './pages/user/Settings.jsx';
+
+import OwnerDashboard from './pages/owner/Dashboard.jsx';
+import OwnerSettings from './pages/owner/Settings.jsx';
+
+const HomeRedirect = () => {
+  const { isAuthenticated, user, initializing, roleHome } = useAuth();
+  if (initializing) return null;
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  return <Navigate to={roleHome(user.role)} replace />;
+};
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <Routes>
+      <Route path="/" element={<HomeRedirect />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/403" element={<Forbidden />} />
 
-      <div className="ticks"></div>
+      <Route element={<ProtectedRoute />}>
+        <Route element={<RoleRoute allow={['ADMIN']} />}>
+          <Route element={<DashboardLayout settingsPath="/admin/settings" />}>
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/users/:id" element={<AdminUserDetails />} />
+            <Route path="/admin/stores" element={<AdminStores />} />
+            <Route path="/admin/settings" element={<AdminSettings />} />
+          </Route>
+        </Route>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <Route element={<RoleRoute allow={['USER']} />}>
+          <Route element={<DashboardLayout settingsPath="/user/settings" />}>
+            <Route path="/user/dashboard" element={<UserDashboard />} />
+            <Route path="/user/stores" element={<UserStores />} />
+            <Route path="/user/ratings" element={<UserRatings />} />
+            <Route path="/user/settings" element={<UserSettings />} />
+          </Route>
+        </Route>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <Route element={<RoleRoute allow={['OWNER']} />}>
+          <Route element={<DashboardLayout settingsPath="/owner/settings" />}>
+            <Route path="/owner/dashboard" element={<OwnerDashboard />} />
+            <Route path="/owner/settings" element={<OwnerSettings />} />
+          </Route>
+        </Route>
+      </Route>
+
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
