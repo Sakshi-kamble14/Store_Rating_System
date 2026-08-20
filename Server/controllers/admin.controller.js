@@ -7,16 +7,24 @@ const catchAsync = require('../utils/catchAsync');
 const { buildPagination } = require('../utils/queryHelpers');
 
 // GET /api/admin/dashboard
+// GET /api/admin/dashboard
 exports.getDashboard = catchAsync(async (req, res) => {
-  const [totalUsers, totalStores, totalRatings] = await Promise.all([
-    userRepository.count(),
-    storeRepository.count(),
-    ratingRepository.count()
-  ]);
+  const [totalUsers, totalStores, totalRatings, ratingAnalytics] =
+    await Promise.all([
+      userRepository.count(),
+      storeRepository.count(),
+      ratingRepository.count(),
+      ratingRepository.getGlobalAnalytics()
+    ]);
 
   res.status(200).json({
     status: 'success',
-    data: { totalUsers, totalStores, totalRatings }
+    data: {
+      totalUsers,
+      totalStores,
+      totalRatings,
+      ratingAnalytics
+    }
   });
 });
 
