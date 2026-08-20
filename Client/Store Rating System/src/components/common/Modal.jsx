@@ -3,29 +3,42 @@ import { X } from 'lucide-react';
 
 const Modal = ({ open, onClose, title, children, footer, size = 'md' }) => {
   const dialogRef = useRef(null);
+  const onCloseRef = useRef(onClose);
+
+  // Always keep the latest onClose function without
+  // causing the modal effect to run on every render.
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
 
   useEffect(() => {
     if (!open) return;
 
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose?.();
+      if (e.key === 'Escape') {
+        onCloseRef.current?.();
+      }
     };
+
     document.addEventListener('keydown', handleKeyDown);
+
+    // Focus the dialog only when the modal opens.
     dialogRef.current?.focus();
+
     document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, [open, onClose]);
+  }, [open]);
 
   if (!open) return null;
 
   const sizes = {
     sm: 'max-w-sm',
     md: 'max-w-md',
-    lg: 'max-w-2xl'
+    lg: 'max-w-2xl',
   };
 
   return (
@@ -35,6 +48,7 @@ const Modal = ({ open, onClose, title, children, footer, size = 'md' }) => {
         onClick={onClose}
         aria-hidden="true"
       />
+
       <div
         ref={dialogRef}
         role="dialog"
@@ -44,10 +58,15 @@ const Modal = ({ open, onClose, title, children, footer, size = 'md' }) => {
         className={`relative w-full ${sizes[size]} rounded-2xl bg-white shadow-popover animate-in outline-none`}
       >
         <div className="flex items-center justify-between border-b border-ink-100 px-6 py-4">
-          <h2 id="modal-title" className="text-base font-semibold text-ink-900">
+          <h2
+            id="modal-title"
+            className="text-base font-semibold text-ink-900"
+          >
             {title}
           </h2>
+
           <button
+            type="button"
             onClick={onClose}
             aria-label="Close dialog"
             className="rounded-lg p-1.5 text-ink-400 hover:bg-ink-100 hover:text-ink-600"
@@ -55,8 +74,16 @@ const Modal = ({ open, onClose, title, children, footer, size = 'md' }) => {
             <X className="h-5 w-5" />
           </button>
         </div>
-        <div className="px-6 py-5">{children}</div>
-        {footer && <div className="flex justify-end gap-2 border-t border-ink-100 px-6 py-4">{footer}</div>}
+
+        <div className="px-6 py-5">
+          {children}
+        </div>
+
+        {footer && (
+          <div className="flex justify-end gap-2 border-t border-ink-100 px-6 py-4">
+            {footer}
+          </div>
+        )}
       </div>
     </div>
   );
