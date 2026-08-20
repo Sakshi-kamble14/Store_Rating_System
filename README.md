@@ -229,7 +229,7 @@ Users are redirected to the appropriate functionality based on their role.
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/yourusername/Store_Rating_System.git
 ```
 
 ```bash
