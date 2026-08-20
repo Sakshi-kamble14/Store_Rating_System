@@ -17,7 +17,7 @@ const Header = ({ user, title, onMenuClick, onLogoutClick, settingsPath }) => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-ink-200 bg-white/90 px-4 py-3.5 backdrop-blur sm:px-6">
+    <header className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-white/50 bg-white/60 px-4 py-4 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.02)] sm:px-6">
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuClick}

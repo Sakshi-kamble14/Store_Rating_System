@@ -61,33 +61,33 @@ const AdminDashboard = () => {
           <div className="space-y-2">
             <Link
               to="/admin/users"
-              className="flex items-center justify-between rounded-lg border border-ink-100 px-4 py-3 hover:border-primary-200 hover:bg-primary-50/50"
+              className="group flex items-center justify-between rounded-xl bg-white/40 border border-ink-200 px-5 py-4 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-soft hover:border-primary-200"
             >
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
-                  <Users className="h-4 w-4" />
+              <div className="flex items-center gap-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 text-primary-600 ring-1 ring-primary-500/20 group-hover:scale-110 transition-transform duration-300">
+                  <Users className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-ink-800">Manage Users</p>
-                  <p className="text-xs text-ink-500">Add, edit and view users</p>
+                  <p className="text-sm font-semibold text-ink-900 group-hover:text-primary-700 transition-colors">Manage Users</p>
+                  <p className="text-xs text-ink-500 mt-0.5">Add, edit and view users</p>
                 </div>
               </div>
-              <ArrowRight className="h-4 w-4 text-ink-400" />
+              <ArrowRight className="h-4 w-4 text-ink-300 group-hover:text-primary-500 group-hover:translate-x-1 transition-all duration-300" />
             </Link>
             <Link
               to="/admin/stores"
-              className="flex items-center justify-between rounded-lg border border-ink-100 px-4 py-3 hover:border-primary-200 hover:bg-primary-50/50"
+              className="group flex items-center justify-between rounded-xl bg-white/40 border border-ink-200 px-5 py-4 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-soft hover:border-success-200"
             >
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-success-50 text-success-600">
-                  <Store className="h-4 w-4" />
+              <div className="flex items-center gap-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-success-50 to-success-100 text-success-600 ring-1 ring-success-500/20 group-hover:scale-110 transition-transform duration-300">
+                  <Store className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-ink-800">Manage Stores</p>
-                  <p className="text-xs text-ink-500">Add, edit and view stores</p>
+                  <p className="text-sm font-semibold text-ink-900 group-hover:text-success-700 transition-colors">Manage Stores</p>
+                  <p className="text-xs text-ink-500 mt-0.5">Add, edit and view stores</p>
                 </div>
               </div>
-              <ArrowRight className="h-4 w-4 text-ink-400" />
+              <ArrowRight className="h-4 w-4 text-ink-300 group-hover:text-success-500 group-hover:translate-x-1 transition-all duration-300" />
             </Link>
           </div>
         </div>

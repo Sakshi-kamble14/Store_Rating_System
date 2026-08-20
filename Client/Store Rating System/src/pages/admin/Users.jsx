@@ -120,8 +120,8 @@ const AdminUsers = () => {
         </button>
       </div>
 
-      <div className="card space-y-3 p-4">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <div className="glass-panel rounded-2xl space-y-4 p-5">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <SearchBar value={nameQuery} onChange={(v) => { setNameQuery(v); setPage(1); }} placeholder="Search by name..." />
           <SearchBar value={emailQuery} onChange={(v) => { setEmailQuery(v); setPage(1); }} placeholder="Search by email..." />
           <SearchBar value={addressQuery} onChange={(v) => { setAddressQuery(v); setPage(1); }} placeholder="Search by address..." />
@@ -132,12 +132,12 @@ const AdminUsers = () => {
             value={role}
             onChange={(v) => { setRole(v); setPage(1); }}
             options={ROLE_OPTIONS}
-            className="w-44"
+            className="w-48"
           />
         </div>
       </div>
 
-      <div className="card overflow-hidden p-0">
+      <div className="card overflow-hidden p-0 border-0 shadow-soft">
         <DataTable
           columns={columns}
           rows={rows}

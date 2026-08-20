@@ -88,7 +88,7 @@ const UserStores = () => {
         <p className="mt-1 text-sm text-ink-500">Find stores near you and share your rating.</p>
       </div>
 
-      <div className="card grid grid-cols-1 gap-3 p-4 sm:grid-cols-4">
+      <div className="glass-panel rounded-2xl grid grid-cols-1 gap-4 p-5 sm:grid-cols-4">
         <SearchBar
           className="sm:col-span-2"
           value={nameQuery}
@@ -122,7 +122,7 @@ const UserStores = () => {
       )}
 
       {!error && !loading && (
-        <div className="card p-0">
+        <div className="card p-0 border-0 shadow-soft">
           <Pagination page={page} totalPages={totalPages} total={total} limit={LIMIT} onPageChange={setPage} />
         </div>
       )}

@@ -57,8 +57,10 @@ const Sidebar = ({ role, onLogoutClick, mobileOpen, onCloseMobile }) => {
             to={item.to}
             onClick={onCloseMobile}
             className={({ isActive }) =>
-              `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
-                isActive ? 'bg-primary-50 text-primary-700' : 'text-ink-600 hover:bg-ink-100'
+              `flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-300 ${
+                isActive 
+                  ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-glow' 
+                  : 'text-ink-600 hover:bg-white/80 hover:text-ink-900 hover:shadow-sm'
               }`
             }
           >
@@ -83,7 +85,7 @@ const Sidebar = ({ role, onLogoutClick, mobileOpen, onCloseMobile }) => {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 border-r border-ink-200 bg-white lg:block">{content}</aside>
+      <aside className="hidden w-64 shrink-0 border-r border-white/50 bg-white/60 backdrop-blur-xl shadow-[4px_0_24px_rgba(0,0,0,0.02)] lg:block z-40">{content}</aside>
 
       {/* Mobile drawer */}
       {mobileOpen && (

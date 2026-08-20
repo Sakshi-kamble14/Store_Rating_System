@@ -30,27 +30,27 @@ const DataTable = ({
   };
 
   return (
-    <div className="overflow-hidden rounded-xl border border-ink-200">
+    <div className="overflow-hidden rounded-2xl border border-white/50 bg-white/70 backdrop-blur-xl shadow-soft">
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">
-          <thead className="bg-ink-50 text-xs font-semibold uppercase tracking-wide text-ink-500">
+          <thead className="bg-ink-50/50 text-xs font-semibold uppercase tracking-wider text-ink-500 border-b border-ink-200">
             <tr>
               {columns.map((col) => (
-                <th key={col.key} scope="col" className={`px-4 py-3.5 ${col.className || ''}`}>
+                <th key={col.key} scope="col" className={`px-5 py-4 ${col.className || ''}`}>
                   {col.sortable ? (
                     <button
                       onClick={() => handleSort(col)}
-                      className="flex items-center gap-1 hover:text-ink-800"
+                      className="flex items-center gap-1 hover:text-ink-800 transition-colors"
                     >
                       {col.label}
                       {sortBy === col.key ? (
                         sortOrder === 'asc' ? (
-                          <ArrowUp className="h-3.5 w-3.5" />
+                          <ArrowUp className="h-3.5 w-3.5 text-primary-500" />
                         ) : (
-                          <ArrowDown className="h-3.5 w-3.5" />
+                          <ArrowDown className="h-3.5 w-3.5 text-primary-500" />
                         )
                       ) : (
-                        <ArrowUpDown className="h-3.5 w-3.5 text-ink-300" />
+                        <ArrowUpDown className="h-3.5 w-3.5 text-ink-300 opacity-50 group-hover:opacity-100" />
                       )}
                     </button>
                   ) : (
@@ -60,7 +60,7 @@ const DataTable = ({
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-ink-100 bg-white">
+          <tbody className="divide-y divide-ink-100/50">
             {loading &&
               Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />)}
 
@@ -74,9 +74,9 @@ const DataTable = ({
 
             {!loading && !error &&
               rows.map((row) => (
-                <tr key={row[rowKey]} className="hover:bg-ink-50/60">
+                <tr key={row[rowKey]} className="group hover:bg-white/90 transition-colors duration-200">
                   {columns.map((col) => (
-                    <td key={col.key} className={`px-4 py-3.5 align-middle text-ink-700 ${col.className || ''}`}>
+                    <td key={col.key} className={`px-5 py-4 align-middle text-ink-700 ${col.className || ''}`}>
                       {col.render ? col.render(row) : row[col.key]}
                     </td>
                   ))}

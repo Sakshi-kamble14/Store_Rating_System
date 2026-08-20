@@ -60,47 +60,49 @@ const Login = () => {
   return (
     <div className="flex min-h-screen bg-ink-50">
       {/* Left brand panel */}
-      <div className="relative hidden w-1/2 flex-col justify-center overflow-hidden bg-primary-700 px-16 lg:flex">
-        <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary-600/40" />
-        <div className="absolute -bottom-32 -left-16 h-80 w-80 rounded-full bg-primary-800/40" />
-        <div className="relative">
-          <div className="mb-8 flex items-center gap-2.5">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
-              <Star className="h-5 w-5 fill-white text-white" />
+      <div className="relative hidden w-1/2 flex-col justify-center overflow-hidden bg-ink-950 px-16 lg:flex">
+        <div className="absolute -right-24 -top-24 h-[500px] w-[500px] rounded-full bg-primary-600/30 blur-3xl" />
+        <div className="absolute -bottom-32 -left-16 h-[400px] w-[400px] rounded-full bg-secondary-600/30 blur-3xl" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+        <div className="relative z-10">
+          <div className="mb-12 flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-glow">
+              <Star className="h-6 w-6 fill-white text-white" />
             </div>
-            <span className="text-xl font-bold text-white">StoreRating</span>
+            <span className="text-2xl font-bold tracking-tight text-white">StoreRating</span>
           </div>
-          <h1 className="text-4xl font-extrabold leading-tight text-white">
+          <h1 className="text-5xl font-extrabold leading-tight text-white tracking-tight">
             Discover.
             <br />
-            Rate. Improve.
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400">Rate. Improve.</span>
           </h1>
-          <p className="mt-4 max-w-sm text-primary-100">
+          <p className="mt-6 max-w-sm text-lg text-ink-300">
             Find the best stores around you and share your experience with others.
           </p>
         </div>
       </div>
 
       {/* Right form panel */}
-      <div className="flex w-full flex-col items-center justify-center px-6 py-12 lg:w-1/2">
-        <div className="w-full max-w-sm">
-          <div className="mb-8 flex items-center gap-2.5 lg:hidden">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-600">
-              <Star className="h-4 w-4 fill-white text-white" />
+      <div className="flex w-full flex-col items-center justify-center px-6 py-12 lg:w-1/2 bg-white relative">
+        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-primary-50/50 to-transparent pointer-events-none" />
+        <div className="w-full max-w-sm relative z-10 animate-fade-in">
+          <div className="mb-10 flex items-center gap-3 lg:hidden">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600 shadow-glow">
+              <Star className="h-5 w-5 fill-white text-white" />
             </div>
-            <span className="text-lg font-bold text-ink-900">StoreRating</span>
+            <span className="text-xl font-bold tracking-tight text-ink-900">StoreRating</span>
           </div>
 
-          <h2 className="text-2xl font-bold text-ink-900">Welcome back 👋</h2>
-          <p className="mt-1.5 text-sm text-ink-500">Sign in to your account to continue.</p>
+          <h2 className="text-3xl font-bold tracking-tight text-ink-900">Welcome back 👋</h2>
+          <p className="mt-2 text-base text-ink-500">Sign in to your account to continue.</p>
 
-          <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-5">
+          <form onSubmit={handleSubmit} noValidate className="mt-10 space-y-6">
             <div>
               <label htmlFor="email" className="label">
                 Email
               </label>
               <div className="relative">
-                <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-400" />
+                <Mail className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-ink-400" />
                 <input
                   id="email"
                   name="email"
@@ -109,7 +111,7 @@ const Login = () => {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="you@example.com"
-                  className={`input pl-10 ${errors.email ? 'input-error' : ''}`}
+                  className={`input pl-11 ${errors.email ? 'input-error' : ''}`}
                   aria-invalid={!!errors.email}
                 />
               </div>
@@ -132,14 +134,14 @@ const Login = () => {
               />
             </div>
 
-            <button type="submit" disabled={submitting} className="btn-primary w-full">
-              {submitting && <LoadingSpinner size="sm" className="text-white" />}
+            <button type="submit" disabled={submitting} className="btn-primary w-full py-3 text-base mt-2">
+              {submitting && <LoadingSpinner size="sm" className="text-white mr-2" />}
               Sign In
             </button>
 
-            <p className="text-center text-sm text-ink-500">
+            <p className="text-center text-sm text-ink-500 pt-4">
               Don&apos;t have an account?{' '}
-              <Link to="/signup" className="font-semibold text-primary-600 hover:text-primary-700">
+              <Link to="/signup" className="font-semibold text-primary-600 hover:text-primary-700 transition-colors">
                 Sign up
               </Link>
             </p>

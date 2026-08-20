@@ -126,13 +126,13 @@ const AdminStores = () => {
         </button>
       </div>
 
-      <div className="card grid grid-cols-1 gap-3 p-4 sm:grid-cols-3">
+      <div className="glass-panel rounded-2xl grid grid-cols-1 gap-4 p-5 sm:grid-cols-3">
         <SearchBar value={nameQuery} onChange={(v) => { setNameQuery(v); setPage(1); }} placeholder="Search by name..." />
         <SearchBar value={emailQuery} onChange={(v) => { setEmailQuery(v); setPage(1); }} placeholder="Search by email..." />
         <SearchBar value={addressQuery} onChange={(v) => { setAddressQuery(v); setPage(1); }} placeholder="Search by address..." />
       </div>
 
-      <div className="card overflow-hidden p-0">
+      <div className="card overflow-hidden p-0 border-0 shadow-soft">
         <DataTable
           columns={columns}
           rows={rows}

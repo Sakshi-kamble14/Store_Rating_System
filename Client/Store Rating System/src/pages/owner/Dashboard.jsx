@@ -85,26 +85,26 @@ const OwnerDashboard = () => {
               {store.raters.length === 0 ? (
                 <p className="text-sm text-ink-500">No customers have rated this store yet.</p>
               ) : (
-                <div className="overflow-hidden rounded-xl border border-ink-200">
+                <div className="overflow-hidden rounded-2xl border border-ink-100/50 bg-white/50">
                   <table className="w-full text-left text-sm">
-                    <thead className="bg-ink-50 text-xs font-semibold uppercase tracking-wide text-ink-500">
+                    <thead className="bg-ink-50/50 text-xs font-semibold uppercase tracking-wider text-ink-500">
                       <tr>
-                        <th className="px-4 py-3">Customer</th>
-                        <th className="px-4 py-3">Email</th>
-                        <th className="px-4 py-3">Rating</th>
+                        <th className="px-5 py-4">Customer</th>
+                        <th className="px-5 py-4">Email</th>
+                        <th className="px-5 py-4">Rating</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-ink-100 bg-white">
+                    <tbody className="divide-y divide-ink-100/50">
                       {store.raters.map((r) => (
-                        <tr key={r.userId}>
-                          <td className="flex items-center gap-2.5 px-4 py-3">
-                            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary-100 text-[10px] font-bold text-primary-700">
+                        <tr key={r.userId} className="hover:bg-white transition-colors duration-200">
+                          <td className="flex items-center gap-3 px-5 py-4">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-[10px] font-bold text-primary-700 ring-2 ring-white">
                               {initials(r.name)}
                             </div>
-                            {r.name}
+                            <span className="font-medium">{r.name}</span>
                           </td>
-                          <td className="px-4 py-3 text-ink-500">{r.email}</td>
-                          <td className="px-4 py-3">
+                          <td className="px-5 py-4 text-ink-500">{r.email}</td>
+                          <td className="px-5 py-4">
                             <RatingStars value={r.rating} size="sm" />
                           </td>
                         </tr>

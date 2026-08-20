@@ -44,7 +44,7 @@ const Modal = ({ open, onClose, title, children, footer, size = 'md' }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
-        className="absolute inset-0 bg-ink-900/40 backdrop-blur-[2px]"
+        className="absolute inset-0 bg-ink-950/40 backdrop-blur-sm transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -55,9 +55,9 @@ const Modal = ({ open, onClose, title, children, footer, size = 'md' }) => {
         aria-modal="true"
         aria-labelledby="modal-title"
         tabIndex={-1}
-        className={`relative w-full ${sizes[size]} rounded-2xl bg-white shadow-popover animate-in outline-none`}
+        className={`relative w-full ${sizes[size]} rounded-[2rem] border border-white/60 bg-white/90 backdrop-blur-xl shadow-popover animate-slide-up outline-none`}
       >
-        <div className="flex items-center justify-between border-b border-ink-100 px-6 py-4">
+        <div className="flex items-center justify-between border-b border-ink-100/50 px-6 py-5">
           <h2
             id="modal-title"
             className="text-base font-semibold text-ink-900"

@@ -44,7 +44,7 @@ const DashboardLayout = ({ settingsPath }) => {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-ink-50">
+    <div className="flex h-screen overflow-hidden bg-ink-50 bg-gradient-to-br from-ink-50 via-white to-primary-50/30">
       <Sidebar
         role={user?.role}
         onLogoutClick={() => setConfirmOpen(true)}
