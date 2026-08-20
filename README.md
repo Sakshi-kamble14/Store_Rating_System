@@ -349,37 +349,23 @@ The application was manually tested for the major user flows.
 ---
 
 ## 📸 Screenshots
+![Login](Database/screenshots/login.png)
 
-### Login
+![Admin Dashboard](Database/screenshots/admin-dashboard.png)
 
-Add your screenshot here:
+![Admin Users](Database/screenshots/admin-users.png)
 
-```markdown
-![Login Page](screenshots/login.png)
-```
+![Admin Stores](Database/screenshots/admin-stores.png)
 
+![User Dashboard](Database/screenshots/user-dashboard.png)
 
-### Admin Dashboard
+![Store List](Database/screenshots/store-list.png)
 
-```markdown
-![Admin Dashboard](screenshots/admin-dashboard.png)
-```
+![Rating](Database/screenshots/rating.png)
 
-### Store Listing
+![Store Owner Dashboard](Database/screenshots/owner-dashboard.png)
 
-```markdown
-![Store Listing](screenshots/store-list.png)
-```
-
-### Rating
-
-```markdown
-![Rating](screenshots/rating.png)
-```
-
-> Add screenshots to a `screenshots` folder in the repository.
-
----
+![ER Diagram](Database/ER.png)
 
 ## 🔒 Security
 
